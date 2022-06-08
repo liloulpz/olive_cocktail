@@ -1,0 +1,27 @@
+<%= simple_form_for @cocktail do |f| %>
+  <%= f.input :name %>
+  <%= f.input :photo_url %>
+  <%= f.button :submit, class: 'btn' %>
+<% end %>
+
+<p>
+  <strong>Ingredients:</strong>
+
+</p>
+<ul>
+  <% @cocktail.doses.each do |dose| %>
+    <li><%= dose.ingredient.name %> - <%= dose.quantity %><%= dose.unity %></li>
+    <%= link_to 'Destroy', cocktail_dose_path(@cocktail.id, dose), method: "delete", data: {confirm: "are you sure ?"} %>
+  <% end %>
+</ul>
+
+<div class="container">
+<%= simple_form_for [@cocktail, @dose] do |f| %>
+  <div class="row">
+    <div class="col-lg"><%= f.association :ingredient %></div>
+    <div class="col-lg"><%= f.input :quantity %></div>
+    <div class="col-lg"><%= f.input :unity, as: :select, collection: Dose.unities.keys %></div>
+  </div>
+  <%= f.button :submit, class: 'btn' %>
+<% end %>
+</div>

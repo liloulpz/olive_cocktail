@@ -1,0 +1,16 @@
+<div class="py-5 mt-5">
+  <%= link_to 'Ajouter un cocktail +', new_cocktail_path %>
+    <ul>
+      <% @cocktails.each do |cocktail|%>
+        <li><%= link_to(cocktail.name, cocktail_path(cocktail)) %></li>
+        <tr>
+          <td>
+            <%= image_tag cocktail.photo_url, height: 40 %>
+          </td>
+          <td><%= link_to 'Show', cocktail %></td>
+          <td><%= link_to 'Edit', edit_cocktail_path(cocktail) %></td>
+          <td><%= link_to 'Destroy', cocktail %></td>
+        </tr>
+      <% end%>
+    </ul>
+</div>
